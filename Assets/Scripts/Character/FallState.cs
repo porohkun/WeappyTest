@@ -1,10 +1,11 @@
-﻿namespace WeappyTest
+﻿namespace WeappyTest.Character
 {
     public class FallState : JumpState
     {
-        public override void OnEnter(CharacterContext context)
+        protected override void OnEnter(CharacterContext context)
         {
-            context.Animator.SetTrigger("Jump");
+            SetDelay(0f, () => context.Animator.SetTrigger("Jump"));
+            context.OnAir = true;
             context.VerticalSpeed = 0f;
             context.VerticalAcceleration = _settings.FallGravity;
         }

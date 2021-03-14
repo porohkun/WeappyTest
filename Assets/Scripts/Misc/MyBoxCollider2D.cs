@@ -22,5 +22,10 @@ namespace WeappyTest
         {
             Destroyed?.Invoke(this);
         }
+
+        //private void Update()
+        //{
+
+        //}
     }
 }

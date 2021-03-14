@@ -23,7 +23,7 @@ namespace WeappyTest
 
         public MyBoxCollider2D[] GetIntersections(MyBoxCollider2D collider)
         {
-            return _colliders.Except(collider).Where(c => c.Bounds.Intersects(collider.Bounds)).ToArray();
+            return _colliders.Except(collider).Where(c => c.enabled && c.Bounds.Intersects(collider.Bounds)).ToArray();
         }
     }
 }

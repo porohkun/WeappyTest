@@ -1,8 +1,8 @@
 ﻿using Zenject;
 
-namespace WeappyTest
+namespace WeappyTest.Character
 {
-    public abstract class CharacterState : IState<CharacterContext>
+    public abstract class CharacterState : BaseState<CharacterContext>
     {
         protected Character.Settings _settings { get; private set; }
 
@@ -11,9 +11,5 @@ namespace WeappyTest
         {
             _settings = settings;
         }
-
-        public abstract void OnEnter(CharacterContext context);
-        public abstract void OnExit(CharacterContext context);
-        public abstract void Update(CharacterContext context);
     }
 }

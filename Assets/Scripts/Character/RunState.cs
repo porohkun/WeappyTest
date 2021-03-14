@@ -1,20 +1,15 @@
-﻿namespace WeappyTest
+﻿namespace WeappyTest.Character
 {
     public class RunState : CharacterState
     {
-        public override void OnEnter(CharacterContext context)
+        protected override void OnEnter(CharacterContext context)
         {
-            context.Animator.SetTrigger("Run");
+            SetDelay(0f, () => context.Animator.SetTrigger("Run"));
             context.VerticalSpeed = 0f;
             context.VerticalAcceleration = 0f;
         }
 
-        public override void OnExit(CharacterContext context)
-        {
-
-        }
-
-        public override void Update(CharacterContext context)
+        protected override void OnUpdate(CharacterContext context)
         {
             if (InputWrapper.Left)
                 context.Direction = Direction.Left;

@@ -1,34 +1,20 @@
 ﻿using UnityEngine;
 
-namespace WeappyTest
+namespace WeappyTest.Character
 {
-    public class CharacterContext : IStateContext
+    public class CharacterContext : BaseContext
     {
-        private Character _character;
-        private SpriteRenderer _spriteRenderer;
-        private Direction _direction;
+        public Character Character { get; private set; }
+        public Ball.Ball TouchingBall { get; set; }
 
-        public Animator Animator { get; private set; }
-        public Direction Direction
+        public bool TouchFloor { get; set; }
+        public bool TouchBall => TouchingBall != null;
+        public bool OnAir { get; set; }
+        public bool CarryBall { get; set; }
+
+        public CharacterContext(Character character, SpriteRenderer spriteRenderer, Animator animator) : base(spriteRenderer, animator)
         {
-            get => _direction;
-            set
-            {
-                _direction = value;
-                _spriteRenderer.flipX = Direction == Direction.Left;
-            }
-        }
-
-        public float HorizontalSpeed { get; internal set; }
-        public float VerticalSpeed { get; internal set; }
-        public float VerticalAcceleration { get; internal set; }
-        public bool TouchFloor { get; internal set; }
-
-        public CharacterContext(Character character, SpriteRenderer spriteRenderer, Animator animator)
-        {
-            _character = character;
-            _spriteRenderer = spriteRenderer;
-            Animator = animator;
+            Character = character;
         }
     }
 }

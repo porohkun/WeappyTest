@@ -7,11 +7,14 @@ namespace WeappyTest
     public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     {
         [SerializeField]
-        private Character.Settings _characterSettings;
+        private Character.Character.Settings _characterSettings;
+        [SerializeField]
+        private Ball.Ball.Settings _ballSettings;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_characterSettings);
+            Container.BindInstance(_ballSettings);
         }
     }
 }

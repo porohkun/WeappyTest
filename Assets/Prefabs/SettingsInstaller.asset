@@ -12,3 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015b7dcc2ef347248817ddec62141983, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
+  _characterSettings:
+    _runSpeed: 150
+    _flySpeed: 150
+    _jumpSpeed: 420
+    _jumpGravity: -1320
+    _fallGravity: -1200
+    _landingTime: 0.2
+  _ballSettings:
+    _runSpeed: 0.75
+    _flySpeed: 0.75
+    _jumpSpeed: 2
+    _jumpGravity: -5
+    _fallGravity: -5

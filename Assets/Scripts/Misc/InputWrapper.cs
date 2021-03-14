@@ -10,5 +10,6 @@ namespace WeappyTest
         public static bool Down => Input.GetKey(KeyCode.DownArrow);
         public static bool Jump => Input.GetKey(KeyCode.Z);
         public static bool BeginJump => Input.GetKeyDown(KeyCode.Z);
+        public static bool BeginGrab => Input.GetKeyDown(KeyCode.X);
     }
 }

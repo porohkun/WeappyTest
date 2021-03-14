@@ -1,21 +1,17 @@
-﻿namespace WeappyTest
+﻿namespace WeappyTest.Character
 {
     public class JumpState : CharacterState
     {
-        public override void OnEnter(CharacterContext context)
+        protected override void OnEnter(CharacterContext context)
         {
-            context.Animator.SetTrigger("Jump");
+            SetDelay(0f, () => context.Animator.SetTrigger("Jump"));
+            context.OnAir = true;
             context.TouchFloor = false;
             context.VerticalSpeed = _settings.JumpSpeed;
             context.VerticalAcceleration = _settings.JumpGravity;
         }
 
-        public override void OnExit(CharacterContext context)
-        {
-
-        }
-
-        public override void Update(CharacterContext context)
+        protected override void OnUpdate(CharacterContext context)
         {
             if (InputWrapper.Left && !InputWrapper.Right)
                 context.Direction = Direction.Left;
