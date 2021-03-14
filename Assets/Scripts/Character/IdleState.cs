@@ -1,8 +1,8 @@
 ﻿namespace WeappyTest
 {
-    public class IdleState : IState<CharacterContext>
+    public class IdleState : CharacterState
     {
-        public void OnEnter(CharacterContext context)
+        public override void OnEnter(CharacterContext context)
         {
             context.Animator.SetTrigger("Idle");
             context.VerticalSpeed = 0f;
@@ -10,12 +10,12 @@
             context.HorizontalSpeed = 0f;
         }
 
-        public void OnExit(CharacterContext context)
+        public override void OnExit(CharacterContext context)
         {
 
         }
 
-        public void Update(CharacterContext context)
+        public override void Update(CharacterContext context)
         {
             if (InputWrapper.Left && !InputWrapper.Right)
                 context.Direction = Direction.Left;

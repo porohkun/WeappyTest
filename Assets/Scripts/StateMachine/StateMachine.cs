@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zenject;
 
 namespace WeappyTest
 {
     public class StateMachine<TContext> where TContext : IStateContext
     {
+        private readonly StateFactory<TContext> _stateFactory;
         private readonly TContext _context;
         private Tuple<IState<TContext>, List<Transition<TContext>>> _currentState;
         private readonly Dictionary<Type, Tuple<IState<TContext>, List<Transition<TContext>>>> _states = new Dictionary<Type, Tuple<IState<TContext>, List<Transition<TContext>>>>();
 
-        public StateMachine(TContext context)
+        public StateMachine(StateFactory<TContext> stateFactory, TContext context)
         {
+            _stateFactory = stateFactory;
             _context = context;
         }
 
         public void AddState<TState>() where TState : IState<TContext>
         {
-            _states[typeof(TState)] = new Tuple<IState<TContext>, List<Transition<TContext>>>(Activator.CreateInstance<TState>(), new List<Transition<TContext>>());
+            _states[typeof(TState)] = new Tuple<IState<TContext>, List<Transition<TContext>>>(_stateFactory.Create<TState>(), new List<Transition<TContext>>());
             if (_currentState == null)
                 ChangeCurrentState(_states.Keys.First());
         }
@@ -62,6 +65,14 @@ namespace WeappyTest
             public static Transition<Tcontext> New<TTargetState>(Func<TContext, bool> condition)
             {
                 return new Transition<Tcontext>(condition, typeof(TTargetState));
+            }
+        }
+
+        public class Factory : PlaceholderFactory<TContext, StateMachine<TContext>>
+        {
+            public override StateMachine<TContext> Create(TContext param)
+            {
+                return base.Create(param);
             }
         }
     }

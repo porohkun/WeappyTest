@@ -6,7 +6,7 @@
         {
             context.Animator.SetTrigger("Jump");
             context.VerticalSpeed = 0f;
-            context.VerticalAcceleration = -5f;
+            context.VerticalAcceleration = _settings.FallGravity;
         }
     }
 }

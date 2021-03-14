@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace WeappyTest
@@ -17,15 +18,16 @@ namespace WeappyTest
         private CharacterContext _context;
 
         [Inject]
-        void Inject(MyPhysicsService myPhysicsService)
+        void Inject(MyPhysicsService myPhysicsService, StateMachine<CharacterContext>.Factory stateMachineFactory)
         {
             _myPhysicsService = myPhysicsService;
+            _context = new CharacterContext(this, _spriteRenderer, _animator);
+            _states = stateMachineFactory.Create(_context);
         }
 
         private void Awake()
         {
-            _context = new CharacterContext(this, _spriteRenderer, _animator);
-            _states = new StateMachine<CharacterContext>(_context);
+            //_states = new StateMachine<CharacterContext>(_context);
             _states.AddState<IdleState>();
             _states.AddState<RunState>();
             _states.AddState<JumpState>();
@@ -73,6 +75,31 @@ namespace WeappyTest
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Debug.Log("TRIGGERED!");
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            [SerializeField]
+            private float _runSpeed = 0.75f;
+            public float RunSpeed => _runSpeed;
+
+            [SerializeField]
+            private float _flySpeed = 0.75f;
+            public float FlySpeed => _flySpeed;
+
+            [SerializeField]
+            private float _jumpSpeed = 2;
+            public float JumpSpeed => _jumpSpeed;
+
+            [SerializeField]
+            private float _jumpGravity = -5;
+            public float JumpGravity => _jumpGravity;
+
+            [SerializeField]
+            private float _fallGravity = -5;
+            public float FallGravity => _fallGravity;
+
         }
     }
 }

@@ -1,21 +1,21 @@
 ﻿namespace WeappyTest
 {
-    public class JumpState : IState<CharacterContext>
+    public class JumpState : CharacterState
     {
-        public virtual void OnEnter(CharacterContext context)
+        public override void OnEnter(CharacterContext context)
         {
             context.Animator.SetTrigger("Jump");
             context.TouchFloor = false;
-            context.VerticalSpeed = 2f;
-            context.VerticalAcceleration = -5f;
+            context.VerticalSpeed = _settings.JumpSpeed;
+            context.VerticalAcceleration = _settings.JumpGravity;
         }
 
-        public void OnExit(CharacterContext context)
+        public override void OnExit(CharacterContext context)
         {
 
         }
 
-        public void Update(CharacterContext context)
+        public override void Update(CharacterContext context)
         {
             if (InputWrapper.Left && !InputWrapper.Right)
                 context.Direction = Direction.Left;
@@ -23,7 +23,7 @@
                 context.Direction = Direction.Right;
 
             if (InputWrapper.Left != InputWrapper.Right)
-                context.HorizontalSpeed = 0.75f;
+                context.HorizontalSpeed = _settings.FlySpeed;
             else
                 context.HorizontalSpeed = 0f;
         }

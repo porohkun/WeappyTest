@@ -20,7 +20,8 @@ namespace WeappyTest
 
             InstallExistingMonoBehaviours();
 
-
+            Container.BindFactory<CharacterContext, StateMachine<CharacterContext>, StateMachine<CharacterContext>.Factory>();
+            Container.BindInterfacesAndSelfTo<StateFactory<CharacterContext>>().AsSingle();
 
         }
 
