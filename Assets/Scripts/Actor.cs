@@ -26,6 +26,11 @@ namespace WeappyTest
             _states = stateMachineFactory.Create(_context);
         }
 
+        public void TriggerState<TState>() where TState : BaseState<T>
+        {
+            _states.ForceState<TState>();
+        }
+
         private void Awake()
         {
             ConfigureBehaviour();

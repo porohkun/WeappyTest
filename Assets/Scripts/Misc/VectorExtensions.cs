@@ -11,5 +11,10 @@
         {
             return new Vector3(vector.x, vector.y, z);
         }
+
+        public static Vector2 Scale(this Vector2 vector, float x, float y)
+        {
+            return new Vector2(vector.x * x, vector.y * y);
+        }
     }
 }

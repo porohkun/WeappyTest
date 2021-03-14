@@ -8,6 +8,8 @@ namespace WeappyTest.Character
     {
         [SerializeField]
         private Vector2 _carryOffset;
+        [SerializeField]
+        private Vector2 _throwOffset;
 
         [Inject]
         private Settings _settings { get; set; }
@@ -18,6 +20,31 @@ namespace WeappyTest.Character
             return new CharacterContext(this, _spriteRenderer, _animator);
         }
 
+        public void ThrowBallUp()
+        {
+            CarryBall.TriggerState<Ball.JumpState>();
+            CarryBall.EnableCollider();
+            CarryBall = null;
+        }
+
+        public void ThrowBall()
+        {
+            CarryBall.transform.position = transform.position + _throwOffset.Scale((int)_context.Direction, 1f).ToVector3();
+            if (_context.Direction == Direction.Right)
+                CarryBall.TriggerState<Ball.ThrowedRightState>();
+            else
+                CarryBall.TriggerState<Ball.ThrowedLeftState>();
+            CarryBall.EnableCollider();
+            CarryBall = null;
+        }
+
+        public void PickUpBall(Ball.Ball ball)
+        {
+            CarryBall = ball;
+            CarryBall.TriggerState<Ball.IdleState>();
+            ball.DisableCollider();
+        }
+
         protected override void ConfigureBehaviour()
         {
             _states.AddState<IdleState>();
@@ -26,26 +53,40 @@ namespace WeappyTest.Character
             _states.AddState<FallState>();
             _states.AddState<LandingState>();
             _states.AddState<PickUpState>();
+            _states.AddState<ThrowState>();
+            _states.AddState<ThrowUpState>();
 
             _states.AddTransition<IdleState, RunState>(c => InputWrapper.Left ^ InputWrapper.Right);
             _states.AddTransition<IdleState, JumpState>(c => InputWrapper.BeginJump);
             _states.AddTransition<IdleState, FallState>(c => !c.TouchFloor);
+            _states.AddTransition<IdleState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
+            _states.AddTransition<IdleState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
 
             _states.AddTransition<RunState, IdleState>(c => InputWrapper.Left == InputWrapper.Right);
             _states.AddTransition<RunState, JumpState>(c => InputWrapper.BeginJump);
             _states.AddTransition<RunState, FallState>(c => !c.TouchFloor);
             _states.AddTransition<RunState, PickUpState>(c => c.TouchBall && InputWrapper.BeginGrab);
+            _states.AddTransition<RunState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
+            _states.AddTransition<RunState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
 
             _states.AddTransition<JumpState, FallState>(c => !InputWrapper.Jump);
             _states.AddTransition<JumpState, FallState>(c => c.VerticalSpeed <= 0f);
+            _states.AddTransition<JumpState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
+            _states.AddTransition<JumpState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
 
             _states.AddTransition<FallState, LandingState>(c => c.TouchFloor && !c.CarryBall);
             _states.AddTransition<FallState, IdleState>(c => c.TouchFloor && c.CarryBall);
+            _states.AddTransition<FallState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
+            _states.AddTransition<FallState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
 
             _states.AddTransition<LandingState, IdleState>(c => InputWrapper.Jump || (InputWrapper.Left ^ InputWrapper.Right));
             _states.AddTransition<LandingState, IdleState>(_settings.LandingTime);
 
             _states.AddTransition<PickUpState, IdleState>(_settings.PickUpTime);
+
+            _states.AddTransition<ThrowState, IdleState>(_settings.ThrowTime);
+
+            _states.AddTransition<ThrowUpState, IdleState>(_settings.ThrowTime);
         }
 
         protected override void CheckCollisionsHorizontal()
@@ -112,6 +153,18 @@ namespace WeappyTest.Character
             [SerializeField]
             private float _pickUpTime = 0.2f;
             public float PickUpTime => _pickUpTime;
+
+            [SerializeField]
+            private float _throwTime = 0.2f;
+            public float ThrowTime => _throwTime;
+
+            [SerializeField]
+            private float _throwUpVerticalSpeed = 0.2f;
+            public float ThrowUpVerticalSpeed => _throwUpVerticalSpeed;
+
+            [SerializeField]
+            private float _throwUpVerticalAcceleration = 0.2f;
+            public float ThrowUpVerticalAcceleration => _throwUpVerticalAcceleration;
         }
     }
 }

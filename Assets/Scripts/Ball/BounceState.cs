@@ -4,8 +4,9 @@
     {
         protected override void OnEnter(BallContext context)
         {
-            context.VerticalSpeed = 0f;
-            context.VerticalAcceleration = 0f;
+            context.TouchFloor = false;
+            context.VerticalSpeed = _settings.BounceSpeed;
+            context.VerticalAcceleration = _settings.BounceAcceleration;
             context.HorizontalSpeed = 0f;
         }
     }

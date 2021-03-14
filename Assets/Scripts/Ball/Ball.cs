@@ -16,23 +16,29 @@ namespace WeappyTest.Ball
         protected override void ConfigureBehaviour()
         {
             _states.AddState<IdleState>();
-            _states.AddState<FlyState>();
+            _states.AddState<ThrowedRightState>();
+            _states.AddState<ThrowedLeftState>();
             _states.AddState<JumpState>();
+            _states.AddState<FlyState>();
+            _states.AddState<TouchWallState>();
             _states.AddState<FallState>();
             _states.AddState<BounceState>();
 
-            //_states.AddTransition<IdleState, RunState>(c => InputWrapper.Left ^ InputWrapper.Right);
-            //_states.AddTransition<IdleState, JumpState>(c => InputWrapper.BeginJump);
-            //_states.AddTransition<IdleState, FallState>(c => !c.TouchFloor);
+            _states.AddTransition<ThrowedLeftState, FlyState>(0f);
 
-            //_states.AddTransition<RunState, IdleState>(c => InputWrapper.Left == InputWrapper.Right);
-            //_states.AddTransition<RunState, JumpState>(c => InputWrapper.BeginJump);
-            //_states.AddTransition<RunState, FallState>(c => !c.TouchFloor);
+            _states.AddTransition<ThrowedRightState, FlyState>(0f);
 
-            //_states.AddTransition<JumpState, FallState>(c => !InputWrapper.Jump);
-            //_states.AddTransition<JumpState, FallState>(c => c.VerticalSpeed <= 0f);
+            _states.AddTransition<JumpState, FallState>(c => c.TouchCeiling);
 
-            //_states.AddTransition<FallState, IdleState>(c => c.TouchFloor);
+            _states.AddTransition<FlyState, TouchWallState>(c => c.TouchWall);
+
+            _states.AddTransition<TouchWallState, FlyState>(c => c.WallTouchesLeft > 0);
+            _states.AddTransition<TouchWallState, FallState>(c => c.WallTouchesLeft <= 0);
+
+            _states.AddTransition<FallState, BounceState>(c => c.TouchFloor);
+
+            _states.AddTransition<BounceState, IdleState>(c => c.TouchFloor);
+
         }
 
         public void DisableCollider()
@@ -41,56 +47,65 @@ namespace WeappyTest.Ball
             _additionalCollider.enabled = false;
         }
 
-        //protected override void CheckCollisions()
-        //{
-        //foreach (var collision in _myPhysicsService.GetIntersections(_collider))
-        //    if (collision.tag == "Floor")
-        //    {
-        //        _context.TouchFloor = true;
-        //        transform.position += new Vector3(0f, collision.Bounds.yMax - _collider.Bounds.yMin);
-        //    }
-        //    else if (collision.tag == "Wall")
-        //    {
-        //        _context.HorizontalSpeed = 0;
-        //        if (_context.Direction == Direction.Left)
-        //            transform.position += new Vector3(collision.Bounds.xMax - _collider.Bounds.xMin, 0f);
-        //        else
-        //            transform.position += new Vector3(collision.Bounds.xMin - _collider.Bounds.xMax, 0f);
-        //    }
-        // }
+        public void EnableCollider()
+        {
+            _collider.enabled = true;
+            _additionalCollider.enabled = true;
+        }
 
         protected override void CheckCollisionsHorizontal()
         {
-
+            _context.TouchWall = false;
+            foreach (var collision in _myPhysicsService.GetIntersections(_collider))
+                if (collision.tag == "Wall")
+                {
+                    _context.TouchWall = true;
+                    if (_context.Direction == Direction.Left)
+                        transform.position += new Vector3(collision.Bounds.xMax - _collider.Bounds.xMin, 0f);
+                    else
+                        transform.position += new Vector3(collision.Bounds.xMin - _collider.Bounds.xMax, 0f);
+                }
         }
 
         protected override void CheckCollisionsVertical()
         {
-
+            _context.TouchFloor = false;
+            _context.TouchCeiling = false;
+            foreach (var collision in _myPhysicsService.GetIntersections(_collider))
+                if (collision.tag == "Floor")
+                {
+                    transform.position += new Vector3(0f, collision.Bounds.yMax - _collider.Bounds.yMin);
+                    _context.TouchFloor = true;
+                }
+                else if (collision.tag == "Ceiling")
+                {
+                    transform.position += new Vector3(0f, collision.Bounds.yMin - _collider.Bounds.yMax);
+                    _context.TouchCeiling = true;
+                }
         }
 
         [Serializable]
         public class Settings
         {
             [SerializeField]
-            private float _runSpeed = 0.75f;
-            public float RunSpeed => _runSpeed;
+            private float _horizontalSpeed = 0.75f;
+            public float HorizontalSpeed => _horizontalSpeed;
 
             [SerializeField]
-            private float _flySpeed = 0.75f;
-            public float FlySpeed => _flySpeed;
+            private float _verticalSpeed = 0.75f;
+            public float VerticalSpeed => _verticalSpeed;
 
             [SerializeField]
-            private float _jumpSpeed = 2;
-            public float JumpSpeed => _jumpSpeed;
+            private float _fallSpeed = 0.75f;
+            public float FallSpeed => _fallSpeed;
 
             [SerializeField]
-            private float _jumpGravity = -5;
-            public float JumpGravity => _jumpGravity;
+            private float _bounceSpeed = 0.75f;
+            public float BounceSpeed => _bounceSpeed;
 
             [SerializeField]
-            private float _fallGravity = -5;
-            public float FallGravity => _fallGravity;
+            private float _bounceAcceleration = 0.75f;
+            public float BounceAcceleration => _bounceAcceleration;
 
         }
     }

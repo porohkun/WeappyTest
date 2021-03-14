@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - BallH
   - BallV
+  - Ceiling
   layers:
   - Default
   - TransparentFX

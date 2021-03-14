@@ -26,6 +26,11 @@ namespace WeappyTest
                 ChangeCurrentState(_states.Keys.First());
         }
 
+        public void ForceState<TState>() where TState : BaseState<TContext>
+        {
+            ChangeCurrentState(typeof(TState));
+        }
+
         private void ChangeCurrentState(Type newState)
         {
             if (_currentState != null)
@@ -60,7 +65,7 @@ namespace WeappyTest
                     if (transition.Condition(_context))
                     {
                         ChangeCurrentState(transition.TargetState);
-                        //Debug.Log($"State changed to {transition.TargetState}");
+                        Debug.Log($"State changed to {transition.TargetState}");
                         stateChanged = true;
                         break;
                     }

@@ -19,9 +19,13 @@ MonoBehaviour:
     _jumpGravity: -1320
     _fallGravity: -1200
     _landingTime: 0.2
+    _pickUpTime: 0.1
+    _throwTime: 0.1
+    _throwUpVerticalSpeed: 120
+    _throwUpVerticalAcceleration: -1200
   _ballSettings:
-    _runSpeed: 0.75
-    _flySpeed: 0.75
-    _jumpSpeed: 2
-    _jumpGravity: -5
-    _fallGravity: -5
+    _horizontalSpeed: 300
+    _verticalSpeed: 300
+    _fallSpeed: -300
+    _bounceSpeed: 120
+    _bounceAcceleration: -1200

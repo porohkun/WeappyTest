@@ -9,8 +9,7 @@ namespace WeappyTest.Character
 
         public bool TouchFloor { get; set; }
         public bool TouchBall => TouchingBall != null;
-        public bool OnAir { get; set; }
-        public bool CarryBall { get; set; }
+        public bool CarryBall => Character.CarryBall != null;
 
         public CharacterContext(Character character, SpriteRenderer spriteRenderer, Animator animator) : base(spriteRenderer, animator)
         {

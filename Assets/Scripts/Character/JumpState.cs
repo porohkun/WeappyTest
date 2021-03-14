@@ -5,7 +5,6 @@
         protected override void OnEnter(CharacterContext context)
         {
             SetDelay(0f, () => context.Animator.SetTrigger("Jump"));
-            context.OnAir = true;
             context.TouchFloor = false;
             context.VerticalSpeed = _settings.JumpSpeed;
             context.VerticalAcceleration = _settings.JumpGravity;
