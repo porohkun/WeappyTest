@@ -33,6 +33,7 @@ namespace WeappyTest
 
         private void ChangeCurrentState(Type newState)
         {
+            Debug.Log($"State changed to {newState}");
             if (_currentState != null)
                 _currentState.Item1.Exit(_context);
             _currentState = _states[newState];
@@ -65,13 +66,14 @@ namespace WeappyTest
                     if (transition.Condition(_context))
                     {
                         ChangeCurrentState(transition.TargetState);
-                        Debug.Log($"State changed to {transition.TargetState}");
                         stateChanged = true;
                         break;
                     }
             }
             while (stateChanged);
             _currentState.Item1.Update(_context);
+
+            DebugViewer.AddValue(typeof(TContext).Name.CropLast(7), _currentState.Item1.GetType());
         }
 
         private class Transition<Tcontext> where Tcontext : BaseContext

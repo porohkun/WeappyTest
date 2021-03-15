@@ -10,7 +10,7 @@ namespace WeappyTest.Ball
 
         protected override BallContext CreateContext()
         {
-            return new BallContext(_spriteRenderer, _animator);
+            return new BallContext(_effects, _spriteRenderer, _animator);
         }
 
         protected override void ConfigureBehaviour()
@@ -55,12 +55,12 @@ namespace WeappyTest.Ball
 
         protected override void CheckCollisionsHorizontal()
         {
-            _context.TouchWall = false;
+            Context.TouchWall = false;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Wall")
                 {
-                    _context.TouchWall = true;
-                    if (_context.Direction == Direction.Left)
+                    Context.TouchWall = true;
+                    if (Context.Direction == Direction.Left)
                         transform.position += new Vector3(collision.Bounds.xMax - _collider.Bounds.xMin, 0f);
                     else
                         transform.position += new Vector3(collision.Bounds.xMin - _collider.Bounds.xMax, 0f);
@@ -69,18 +69,18 @@ namespace WeappyTest.Ball
 
         protected override void CheckCollisionsVertical()
         {
-            _context.TouchFloor = false;
-            _context.TouchCeiling = false;
+            Context.TouchFloor = false;
+            Context.TouchCeiling = false;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Floor")
                 {
                     transform.position += new Vector3(0f, collision.Bounds.yMax - _collider.Bounds.yMin);
-                    _context.TouchFloor = true;
+                    Context.TouchFloor = true;
                 }
                 else if (collision.tag == "Ceiling")
                 {
                     transform.position += new Vector3(0f, collision.Bounds.yMin - _collider.Bounds.yMax);
-                    _context.TouchCeiling = true;
+                    Context.TouchCeiling = true;
                 }
         }
 

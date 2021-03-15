@@ -26,6 +26,9 @@ namespace WeappyTest
             Container.BindFactory<Ball.BallContext, StateMachine<Ball.BallContext>, StateMachine<Ball.BallContext>.Factory>();
             Container.BindInterfacesAndSelfTo<StateFactory<Ball.BallContext>>().AsSingle();
 
+            Container.BindFactory<Boss.BossContext, StateMachine<Boss.BossContext>, StateMachine<Boss.BossContext>.Factory>();
+            Container.BindInterfacesAndSelfTo<StateFactory<Boss.BossContext>>().AsSingle();
+
         }
 
         public override void Start()

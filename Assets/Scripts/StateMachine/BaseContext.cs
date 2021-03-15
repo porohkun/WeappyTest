@@ -6,9 +6,10 @@ namespace WeappyTest
     {
         private SpriteRenderer _spriteRenderer;
         public Animator Animator { get; private set; }
+        public EffectKeeper Effects { get; private set; }
 
-        private Direction _direction;
-        public Direction Direction
+        private Direction _direction = Direction.Right;
+        public virtual Direction Direction
         {
             get => _direction;
             set
@@ -22,8 +23,9 @@ namespace WeappyTest
         public float VerticalSpeed { get; internal set; }
         public float VerticalAcceleration { get; internal set; }
 
-        public BaseContext(SpriteRenderer spriteRenderer, Animator animator)
+        public BaseContext(EffectKeeper effects, SpriteRenderer spriteRenderer, Animator animator)
         {
+            Effects = effects;
             _spriteRenderer = spriteRenderer;
             Animator = animator;
         }

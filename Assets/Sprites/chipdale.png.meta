@@ -47,6 +47,12 @@ TextureImporter:
   - first:
       213: -5067242693054593047
     second: chip_throw
+  - first:
+      213: 4013391805884275873
+    second: chip_stun
+  - first:
+      213: -4987725415542263913
+    second: star
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -470,6 +476,48 @@ TextureImporter:
       bones: []
       spriteID: 9e789c93e998da9b0800000000000000
       internalID: -5067242693054593047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chip_stun
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 123
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac1236659e62b730800000000000000
+      internalID: 4013391805884275873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: star
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 121
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.4, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f6a61292a08cab0800000000000000
+      internalID: -4987725415542263913
       vertices: []
       indices: 
       edges: []

@@ -17,7 +17,7 @@ namespace WeappyTest.Character
 
         protected override CharacterContext CreateContext()
         {
-            return new CharacterContext(this, _spriteRenderer, _animator);
+            return new CharacterContext(this, _effects, _spriteRenderer, _animator);
         }
 
         public void ThrowBallUp()
@@ -29,8 +29,8 @@ namespace WeappyTest.Character
 
         public void ThrowBall()
         {
-            CarryBall.transform.position = transform.position + _throwOffset.Scale((int)_context.Direction, 1f).ToVector3();
-            if (_context.Direction == Direction.Right)
+            CarryBall.transform.position = transform.position + _throwOffset.Scale((int)Context.Direction, 1f).ToVector3();
+            if (Context.Direction == Direction.Right)
                 CarryBall.TriggerState<Ball.ThrowedRightState>();
             else
                 CarryBall.TriggerState<Ball.ThrowedLeftState>();
@@ -55,6 +55,8 @@ namespace WeappyTest.Character
             _states.AddState<PickUpState>();
             _states.AddState<ThrowState>();
             _states.AddState<ThrowUpState>();
+            _states.AddState<StunState>();
+            _states.AddState<HitState>();
 
             _states.AddTransition<IdleState, RunState>(c => InputWrapper.Left ^ InputWrapper.Right);
             _states.AddTransition<IdleState, JumpState>(c => InputWrapper.BeginJump);
@@ -87,18 +89,29 @@ namespace WeappyTest.Character
             _states.AddTransition<ThrowState, IdleState>(_settings.ThrowTime);
 
             _states.AddTransition<ThrowUpState, IdleState>(_settings.ThrowTime);
+
+            _states.AddTransition<StunState, IdleState>(_settings.StunTime);
+
+            _states.AddTransition<HitState, IdleState>(_settings.FallTime);
         }
 
         protected override void CheckCollisionsHorizontal()
         {
-            _context.TouchingBall = null;
+            Context.TouchingBall = null;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Wall" || collision.tag == "BallH")
                 {
                     if (collision.tag == "BallH")
-                        _context.TouchingBall = collision.GetComponent<Ball.Ball>();
-                    _context.HorizontalSpeed = 0;
-                    if (_context.Direction == Direction.Left)
+                        if (collision.GetComponent<Ball.Ball>().Context.TouchFloor)
+                            Context.TouchingBall = collision.GetComponent<Ball.Ball>();
+                        else
+                        {
+                            if (!Context.Blinking)
+                                TriggerState<StunState>();
+                            continue;
+                        }
+                    Context.HorizontalSpeed = 0;
+                    if (collision.Bounds.center.x < _collider.Bounds.center.x)
                         transform.position += new Vector3(collision.Bounds.xMax - _collider.Bounds.xMin, 0f);
                     else
                         transform.position += new Vector3(collision.Bounds.xMin - _collider.Bounds.xMax, 0f);
@@ -107,13 +120,16 @@ namespace WeappyTest.Character
 
         protected override void CheckCollisionsVertical()
         {
-            _context.TouchFloor = false;
+            Context.TouchFloor = false;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Floor" || collision.tag == "BallV")
                 {
-                    //if (!_context.TouchFloor)
+                    if (collision.tag == "BallV" && !collision.transform.parent.GetComponent<Ball.Ball>().Context.TouchFloor)
+                    {
+                        continue;
+                    }
                     transform.position += new Vector3(0f, collision.Bounds.yMax - _collider.Bounds.yMin);
-                    _context.TouchFloor = true;
+                    Context.TouchFloor = true;
                 }
         }
 
@@ -121,11 +137,26 @@ namespace WeappyTest.Character
         {
             if (CarryBall != null)
                 CarryBall.transform.position = transform.position + _carryOffset.ToVector3();
+
+            Context.Animator.SetBool("Blink", Context.Blinking);
+
+            //DebugViewer.AddValue("Blinking", Context.Blinking);
+            //DebugViewer.AddValue("Direction", Context.Direction);
+            //DebugViewer.AddValue("HorizontalSpeed", Context.HorizontalSpeed);
+            //DebugViewer.AddValue("VerticalSpeed", Context.VerticalSpeed);
+            //DebugViewer.AddValue("VerticalAcceleration", Context.VerticalAcceleration);
+            //DebugViewer.AddValue("CarryBall", Context.CarryBall);
+            //DebugViewer.AddValue("TouchBall", Context.TouchBall);
+            //DebugViewer.AddValue("TouchFloor", Context.TouchFloor);
         }
 
         [Serializable]
         public class Settings
         {
+            [SerializeField]
+            private int _lives = 3;
+            public int Lives => _lives;
+
             [SerializeField]
             private float _runSpeed = 0.75f;
             public float RunSpeed => _runSpeed;
@@ -165,6 +196,42 @@ namespace WeappyTest.Character
             [SerializeField]
             private float _throwUpVerticalAcceleration = 0.2f;
             public float ThrowUpVerticalAcceleration => _throwUpVerticalAcceleration;
+
+            [SerializeField]
+            private float _stunVerticalSpeed = 0.2f;
+            public float StunVerticalSpeed => _stunVerticalSpeed;
+
+            [SerializeField]
+            private float _stunVerticalAcceleration = 0.2f;
+            public float StunVerticalAcceleration => _stunVerticalAcceleration;
+
+            [SerializeField]
+            private float _stunTime = 0.2f;
+            public float StunTime => _stunTime;
+
+            [SerializeField]
+            private float _stunBlinkTime = 0.2f;
+            public float StunBlinkTime => _stunBlinkTime;
+
+            [SerializeField]
+            private float _fallHorizontalSpeed = 0.2f;
+            public float FallHorizontalSpeed => _fallHorizontalSpeed;
+
+            [SerializeField]
+            private float _fallVerticalSpeed = 0.2f;
+            public float FallVerticalSpeed => _fallVerticalSpeed;
+
+            [SerializeField]
+            private float _fallVerticalAcceleration = 0.2f;
+            public float FallVerticalAcceleration => _fallVerticalAcceleration;
+
+            [SerializeField]
+            private float _fallTime = 0.2f;
+            public float FallTime => _fallTime;
+
+            [SerializeField]
+            private float _fallBlinkTime = 0.2f;
+            public float FallBlinkTime => _fallBlinkTime;
         }
     }
 }

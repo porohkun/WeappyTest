@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
   _characterSettings:
+    _lives: 3
     _runSpeed: 150
     _flySpeed: 150
     _jumpSpeed: 420
@@ -23,9 +24,27 @@ MonoBehaviour:
     _throwTime: 0.1
     _throwUpVerticalSpeed: 120
     _throwUpVerticalAcceleration: -1200
+    _stunVerticalSpeed: 360
+    _stunVerticalAcceleration: -2100
+    _stunTime: 0.5
+    _stunBlinkTime: 1
+    _fallHorizontalSpeed: -100
+    _fallVerticalSpeed: 200
+    _fallVerticalAcceleration: -1200
+    _fallTime: 0.6
+    _fallBlinkTime: 1
   _ballSettings:
     _horizontalSpeed: 300
     _verticalSpeed: 300
     _fallSpeed: -300
     _bounceSpeed: 120
     _bounceAcceleration: -1200
+  _bossSettings:
+    _lives: 5
+    _highFlightSpeed: 150
+    _lowFlightSpeed: 180
+    _minPauseLength: 1
+    _maxPauseLength: 3
+    _blinkTime: 1
+    _retreatHorizontalSpeed: 250
+    _retreatVerticalSpeed: 250

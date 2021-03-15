@@ -9,6 +9,8 @@ TagManager:
   - BallH
   - BallV
   - Ceiling
+  - Spawner
+  - Enemy
   layers:
   - Default
   - TransparentFX

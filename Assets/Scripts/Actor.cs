@@ -14,7 +14,8 @@ namespace WeappyTest
 
         protected MyPhysicsService _myPhysicsService;
         protected StateMachine<T> _states;
-        protected T _context;
+        protected EffectKeeper _effects = new EffectKeeper();
+        public T Context { get; private set; }
 
         protected abstract T CreateContext();
 
@@ -22,8 +23,8 @@ namespace WeappyTest
         void Inject(MyPhysicsService myPhysicsService, StateMachine<T>.Factory stateMachineFactory)
         {
             _myPhysicsService = myPhysicsService;
-            _context = CreateContext();
-            _states = stateMachineFactory.Create(_context);
+            Context = CreateContext();
+            _states = stateMachineFactory.Create(Context);
         }
 
         public void TriggerState<TState>() where TState : BaseState<T>
@@ -40,13 +41,14 @@ namespace WeappyTest
 
         private void Update()
         {
-            _context.VerticalSpeed += _context.VerticalAcceleration * Time.deltaTime;
+            Context.VerticalSpeed += Context.VerticalAcceleration * Time.deltaTime;
 
             _states.Update();
+            _effects.Update();
 
-            transform.position += new Vector3(_context.HorizontalSpeed * (int)_context.Direction, 0f) * Time.deltaTime;
+            transform.position += new Vector3(Context.HorizontalSpeed * (int)Context.Direction, 0f) * Time.deltaTime;
             CheckCollisionsHorizontal();
-            transform.position += new Vector3(0f, _context.VerticalSpeed) * Time.deltaTime;
+            transform.position += new Vector3(0f, Context.VerticalSpeed) * Time.deltaTime;
             CheckCollisionsVertical();
 
             OnUpdate();

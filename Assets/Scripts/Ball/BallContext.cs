@@ -4,9 +4,11 @@ namespace WeappyTest.Ball
 {
     public class BallContext : BaseContext
     {
-        public BallContext(SpriteRenderer spriteRenderer, Animator animator) : base(spriteRenderer, animator)
+        public BallContext(EffectKeeper effects, SpriteRenderer spriteRenderer, Animator animator) : base(effects, spriteRenderer, animator)
         {
         }
+
+        public override Direction Direction { get; set; }
 
         public bool TouchWall { get; internal set; }
         public bool TouchFloor { get; internal set; }

@@ -7,7 +7,7 @@ namespace WeappyTest.Ball
         protected Ball.Settings _settings { get; private set; }
 
         [Inject]
-        public void Inject(Ball.Settings settings)
+        private void Inject(Ball.Settings settings)
         {
             _settings = settings;
         }
