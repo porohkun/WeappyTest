@@ -5,7 +5,6 @@
         protected override void OnEnter(CharacterContext context)
         {
             SetDelay(0f, () => context.Animator.SetTrigger("Crouch"));
-            context.Animator.SetBool("Carry", false);
             context.HorizontalSpeed = 0f;
             if (context.TouchFloor)
             {

@@ -20,6 +20,13 @@ namespace WeappyTest.Character
             return new CharacterContext(this, _effects, _spriteRenderer, _animator);
         }
 
+        public void DropBall()
+        {
+            CarryBall.TriggerState<Ball.BounceState>();
+            CarryBall.EnableCollider();
+            CarryBall = null;
+        }
+
         public void ThrowBallUp()
         {
             CarryBall.TriggerState<Ball.JumpState>();
@@ -139,6 +146,7 @@ namespace WeappyTest.Character
                 CarryBall.transform.position = transform.position + _carryOffset.ToVector3();
 
             Context.Animator.SetBool("Blink", Context.Blinking);
+            Context.Animator.SetBool("Carry", Context.CarryBall);
 
             //DebugViewer.AddValue("Blinking", Context.Blinking);
             //DebugViewer.AddValue("Direction", Context.Direction);
