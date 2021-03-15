@@ -17,7 +17,7 @@ namespace WeappyTest.Character
 
         protected override CharacterContext CreateContext()
         {
-            return new CharacterContext(this, _effects, _spriteRenderer, _animator);
+            return new CharacterContext(this, _effects, _spriteRenderer, _animator) { Lives = _settings.Lives };
         }
 
         public void DropBall()
@@ -64,12 +64,14 @@ namespace WeappyTest.Character
             _states.AddState<ThrowUpState>();
             _states.AddState<StunState>();
             _states.AddState<HitState>();
+            _states.AddState<DieState>();
 
             _states.AddTransition<IdleState, RunState>(c => InputWrapper.Left ^ InputWrapper.Right);
             _states.AddTransition<IdleState, JumpState>(c => InputWrapper.BeginJump);
             _states.AddTransition<IdleState, FallState>(c => !c.TouchFloor);
             _states.AddTransition<IdleState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
             _states.AddTransition<IdleState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
+            _states.AddTransition<IdleState, DieState>(c => c.Dead);
 
             _states.AddTransition<RunState, IdleState>(c => InputWrapper.Left == InputWrapper.Right);
             _states.AddTransition<RunState, JumpState>(c => InputWrapper.BeginJump);
@@ -104,6 +106,8 @@ namespace WeappyTest.Character
 
         protected override void CheckCollisionsHorizontal()
         {
+            if (Context.Dead)
+                return;
             Context.TouchingBall = null;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Wall" || collision.tag == "BallH")
@@ -127,6 +131,8 @@ namespace WeappyTest.Character
 
         protected override void CheckCollisionsVertical()
         {
+            if (Context.Dead)
+                return;
             Context.TouchFloor = false;
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Floor" || collision.tag == "BallV")

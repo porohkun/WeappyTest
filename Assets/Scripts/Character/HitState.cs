@@ -4,6 +4,7 @@
     {
         protected override void OnEnter(CharacterContext context)
         {
+            context.Lives--;
             context.Animator.SetTrigger("Fall");
             context.Effects.Add<BlinkEffect>(_settings.FallBlinkTime);
             context.HorizontalSpeed = _settings.FallHorizontalSpeed;

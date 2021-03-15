@@ -11,6 +11,8 @@ namespace WeappyTest.Character
         public bool TouchBall => TouchingBall != null;
         public bool CarryBall => Character.CarryBall != null;
         public bool Blinking => Effects.Active<BlinkEffect>();
+        public int Lives { get; internal set; }
+        public bool Dead => Lives == 0;
 
         public CharacterContext(Character character, EffectKeeper effects, SpriteRenderer spriteRenderer, Animator animator) : base(effects, spriteRenderer, animator)
         {
