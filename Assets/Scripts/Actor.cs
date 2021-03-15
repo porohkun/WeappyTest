@@ -1,5 +1,4 @@
-﻿using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace WeappyTest
@@ -17,7 +16,7 @@ namespace WeappyTest
         protected StateMachine<T> _states;
         protected EffectKeeper _effects = new EffectKeeper();
         public T Context { get; private set; }
-        
+
         protected abstract T CreateContext();
 
         [Inject]

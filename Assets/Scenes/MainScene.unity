@@ -647,6 +647,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3664484768816650789, guid: 634716c89efeb72468f90c3c704697f0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -47
+      objectReference: {fileID: 0}
     - target: {fileID: 8090821676430595469, guid: 634716c89efeb72468f90c3c704697f0,
         type: 3}
       propertyPath: m_Name
@@ -655,7 +660,7 @@ PrefabInstance:
     - target: {fileID: 8090821676430595469, guid: 634716c89efeb72468f90c3c704697f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8090821676430595475, guid: 634716c89efeb72468f90c3c704697f0,
         type: 3}
@@ -711,6 +716,19 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090821677456278698, guid: 634716c89efeb72468f90c3c704697f0,
+        type: 3}
+      propertyPath: m_text
+      value: 'chip      dale
+
+
+        select character'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642393355142121176, guid: 634716c89efeb72468f90c3c704697f0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634716c89efeb72468f90c3c704697f0, type: 3}
