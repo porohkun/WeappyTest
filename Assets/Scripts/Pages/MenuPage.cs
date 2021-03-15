@@ -7,7 +7,7 @@ namespace WeappyTest
     public class MenuPage : BasePage
     {
         [SerializeField]
-        private SpriteRenderer[] _charactersOutline;
+        private GameObject[] _charactersOutline;
 
         private int _selectedCharacter = 0;
         private ICommand _navigateGamePageCommand;
@@ -25,20 +25,20 @@ namespace WeappyTest
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            if (InputWrapper.BeginLeft || InputWrapper.BeginRight)
             {
                 _selectedCharacter = (_selectedCharacter + 1) % _charactersOutline.Length;
                 ShowCharacter();
             }
 
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (InputWrapper.BeginEnter)
                 _navigateGamePageCommand.Execute();
         }
 
         private void ShowCharacter()
         {
             for (int i = 0; i < _charactersOutline.Length; i++)
-                _charactersOutline[i].enabled = i == _selectedCharacter;
+                _charactersOutline[i].SetActive(i == _selectedCharacter);
         }
     }
 }
