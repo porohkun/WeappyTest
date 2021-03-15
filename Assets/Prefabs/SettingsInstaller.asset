@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
   _characterSettings:
+    _prefabs:
+    - {fileID: 6712595059506608472, guid: dcb95ef27b191b44b98c24ca4b9b4f4d, type: 3}
+    - {fileID: 6576932002157786392, guid: 44f83bfae75c6c34d98afa4ca5c7c1eb, type: 3}
     _lives: 3
     _runSpeed: 150
     _flySpeed: 150
