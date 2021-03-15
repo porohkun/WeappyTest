@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -10,13 +11,27 @@ namespace WeappyTest.Boss
         private BossSpawnPoint[] _leftPoints;
         [SerializeField]
         private BossSpawnPoint[] _rightPoints;
+        [SerializeField]
+        private SlimeSpawnPoint[] _slimeSpawnPoints;
+
+        public IEnumerable<SlimeSpawnPoint> SlimeSpawnPoints => _slimeSpawnPoints;
 
         [Inject]
         private Settings _settings { get; set; }
+        [Inject]
+        private Slime.Slime.Factory _slimeFactory { get; set; }
 
         protected override BossContext CreateContext()
         {
             return new BossContext(this, _effects, _spriteRenderer, _animator) { Lives = _settings.Lives };
+        }
+
+        public void SpawnSlimeAt(SlimeSpawnPoint point)
+        {
+            var slime = _slimeFactory.Create();
+            slime.transform.SetParent(transform.parent.parent);
+            slime.transform.position = new Vector3(point.transform.position.x, transform.position.y);
+            slime.Context.Direction = point.Direction; ;
         }
 
         public bool TeleportToSpawner(int spawnerIndex)

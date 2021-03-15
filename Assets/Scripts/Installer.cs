@@ -8,6 +8,9 @@ namespace WeappyTest
 {
     public class Installer : MonoInstaller
     {
+        [Inject]
+        private Slime.Slime.Settings _slimeSettings;
+
         public override void InstallBindings()
         {
             var types = Assembly.GetExecutingAssembly().GetTypes();
@@ -29,6 +32,10 @@ namespace WeappyTest
             Container.BindFactory<Boss.BossContext, StateMachine<Boss.BossContext>, StateMachine<Boss.BossContext>.Factory>();
             Container.BindInterfacesAndSelfTo<StateFactory<Boss.BossContext>>().AsSingle();
 
+            Container.BindFactory<Slime.SlimeContext, StateMachine<Slime.SlimeContext>, StateMachine<Slime.SlimeContext>.Factory>();
+            Container.BindInterfacesAndSelfTo<StateFactory<Slime.SlimeContext>>().AsSingle();
+
+            Container.BindFactory<Slime.Slime, Slime.Slime.Factory>().FromComponentInNewPrefab(_slimeSettings.Prefab);
         }
 
         public override void Start()

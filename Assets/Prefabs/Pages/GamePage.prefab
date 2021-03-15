@@ -525,11 +525,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 3951356198610229627, guid: 3637e1cddac7e6a4ab18734a43042694,
-        type: 3}
-      propertyPath: m_TagString
-      value: BallH
-      objectReference: {fileID: 0}
     - target: {fileID: 6663279434550278952, guid: 3637e1cddac7e6a4ab18734a43042694,
         type: 3}
       propertyPath: m_RootOrder

@@ -40,11 +40,20 @@ MonoBehaviour:
     _bounceSpeed: 120
     _bounceAcceleration: -1200
   _bossSettings:
-    _lives: 5
+    _lives: 1
     _highFlightSpeed: 150
     _lowFlightSpeed: 180
-    _minPauseLength: 1
-    _maxPauseLength: 3
+    _minPauseLength: 0.5
+    _maxPauseLength: 2
     _blinkTime: 1
     _retreatHorizontalSpeed: 250
     _retreatVerticalSpeed: 250
+  _slimeSettings:
+    _prefab: {fileID: 4429974661441099770, guid: 25d26a608d47c7741ad2d748bbb8b096,
+      type: 3}
+    _lives: 5
+    _fallSpeed: 150
+    _fallAcceleration: -1200
+    _bounceSpeed: 120
+    _bounceAcceleration: -1200
+    _runSpeed: 100
