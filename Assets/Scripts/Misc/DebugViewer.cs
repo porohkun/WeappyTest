@@ -12,7 +12,8 @@ namespace WeappyTest
 
         public static void AddValue(string key, object value)
         {
-            _instance._values[key] = value;
+            if (_instance != null)
+                _instance._values[key] = value;
         }
 
         [SerializeField]

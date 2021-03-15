@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace WeappyTest.Character
 {
@@ -6,6 +7,8 @@ namespace WeappyTest.Character
     {
         [Inject]
         private NavigatePageCommand<MenuPage> _menuPageCommand;
+        [Inject]
+        private FadeService _fadeService;
 
         protected override void OnEnter(CharacterContext context)
         {
@@ -14,7 +17,15 @@ namespace WeappyTest.Character
             context.VerticalAcceleration = 0f;
             context.HorizontalSpeed = 0f;
 
-            SetDelay(1.5f, () => _menuPageCommand.Execute());
+            InputWrapper.Enabled = false;
+            SetDelay(1.5f, () =>
+            {
+                _fadeService.FadeOut(() =>
+                {
+                    var scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
+                });
+            });
         }
     }
 }
