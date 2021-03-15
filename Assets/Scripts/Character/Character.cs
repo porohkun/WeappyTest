@@ -102,7 +102,7 @@ namespace WeappyTest.Character
                 if (collision.tag == "Wall" || collision.tag == "BallH")
                 {
                     if (collision.tag == "BallH")
-                        if (collision.GetComponent<Ball.Ball>().Context.TouchFloor)
+                        if (!collision.GetComponent<Ball.Ball>().Context.IsProjectile)
                             Context.TouchingBall = collision.GetComponent<Ball.Ball>();
                         else
                         {
@@ -124,7 +124,7 @@ namespace WeappyTest.Character
             foreach (var collision in _myPhysicsService.GetIntersections(_collider))
                 if (collision.tag == "Floor" || collision.tag == "BallV")
                 {
-                    if (collision.tag == "BallV" && !collision.transform.parent.GetComponent<Ball.Ball>().Context.TouchFloor)
+                    if (collision.tag == "BallV" && collision.transform.parent.GetComponent<Ball.Ball>().Context.IsProjectile)
                     {
                         continue;
                     }

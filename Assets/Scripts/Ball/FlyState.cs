@@ -7,6 +7,12 @@
             context.VerticalSpeed = 0f;
             context.VerticalAcceleration = 0f;
             context.HorizontalSpeed = _settings.HorizontalSpeed;
+            context.IsProjectile = true;
+        }
+
+        protected override void OnExit(BallContext context)
+        {
+            context.IsProjectile = false;
         }
     }
 }

@@ -87,7 +87,7 @@ namespace WeappyTest.Boss
                 }
                 else if (collision.tag == "BallH")
                 {
-                    if (!Context.Blinking)
+                    if (!Context.Blinking && collision.GetComponent<Ball.Ball>().Context.IsProjectile)
                         TriggerState<HitState>();
                 }
         }

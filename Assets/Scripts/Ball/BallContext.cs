@@ -14,5 +14,6 @@ namespace WeappyTest.Ball
         public bool TouchFloor { get; internal set; }
         public int WallTouchesLeft { get; internal set; }
         public bool TouchCeiling { get; internal set; }
+        public bool IsProjectile { get; internal set; }
     }
 }

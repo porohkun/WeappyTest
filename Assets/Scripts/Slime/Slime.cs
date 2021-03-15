@@ -42,7 +42,7 @@ namespace WeappyTest.Slime
                         player.TriggerState<Character.HitState>();
                     }
                 }
-                else if (collision.tag == "BallH")
+                else if (collision.tag == "BallH" && collision.GetComponent<Ball.Ball>().Context.IsProjectile)
                 {
                     TriggerState<DieState>();
                 }
