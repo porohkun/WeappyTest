@@ -66,11 +66,11 @@ namespace WeappyTest.Character
             _states.AddState<HitState>();
             _states.AddState<DieState>();
 
-            _states.AddTransition<IdleState, RunState>(c => InputWrapper.Left ^ InputWrapper.Right);
-            _states.AddTransition<IdleState, JumpState>(c => InputWrapper.BeginJump);
-            _states.AddTransition<IdleState, FallState>(c => !c.TouchFloor);
-            _states.AddTransition<IdleState, ThrowState>(c => c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
-            _states.AddTransition<IdleState, ThrowUpState>(c => c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
+            _states.AddTransition<IdleState, RunState>(c => !c.Dead && (InputWrapper.Left ^ InputWrapper.Right));
+            _states.AddTransition<IdleState, JumpState>(c => !c.Dead && InputWrapper.BeginJump);
+            _states.AddTransition<IdleState, FallState>(c => !c.Dead && !c.TouchFloor);
+            _states.AddTransition<IdleState, ThrowState>(c => !c.Dead && c.CarryBall && InputWrapper.BeginGrab && !InputWrapper.Up);
+            _states.AddTransition<IdleState, ThrowUpState>(c => !c.Dead && c.CarryBall && InputWrapper.BeginGrab && InputWrapper.Up);
             _states.AddTransition<IdleState, DieState>(c => c.Dead);
 
             _states.AddTransition<RunState, IdleState>(c => InputWrapper.Left == InputWrapper.Right);
