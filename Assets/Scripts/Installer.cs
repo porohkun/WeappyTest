@@ -10,6 +10,8 @@ namespace WeappyTest
     {
         [Inject]
         private Slime.Slime.Settings _slimeSettings;
+        [Inject]
+        private Character.Character.Settings _characterSettings;
 
         public override void InstallBindings()
         {
@@ -36,6 +38,9 @@ namespace WeappyTest
             Container.BindInterfacesAndSelfTo<StateFactory<Slime.SlimeContext>>().AsSingle();
 
             Container.BindFactory<Slime.Slime, Slime.Slime.Factory>().FromComponentInNewPrefab(_slimeSettings.Prefab);
+
+            Container.BindFactory<Character.Character, Character.Character.FactoryChip>().FromComponentInNewPrefab(_characterSettings.Prefabs[0]);
+            Container.BindFactory<Character.Character, Character.Character.FactoryDale>().FromComponentInNewPrefab(_characterSettings.Prefabs[1]);
         }
 
         public override void Start()

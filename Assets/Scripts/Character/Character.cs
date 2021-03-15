@@ -168,6 +168,10 @@ namespace WeappyTest.Character
         public class Settings
         {
             [SerializeField]
+            private Character[] _prefabs;
+            public Character[] Prefabs => _prefabs;
+
+            [SerializeField]
             private int _lives = 3;
             public int Lives => _lives;
 
@@ -247,5 +251,8 @@ namespace WeappyTest.Character
             private float _fallBlinkTime = 0.2f;
             public float FallBlinkTime => _fallBlinkTime;
         }
+
+        public class FactoryChip : PlaceholderFactory<Character> { }
+        public class FactoryDale : PlaceholderFactory<Character> { }
     }
 }

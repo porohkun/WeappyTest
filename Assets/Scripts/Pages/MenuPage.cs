@@ -9,7 +9,7 @@ namespace WeappyTest
         [SerializeField]
         private GameObject[] _charactersOutline;
 
-        private int _selectedCharacter = 0;
+        public static int SelectedCharacter = 0;
         private ICommand _navigateGamePageCommand;
 
         [Inject]
@@ -27,7 +27,7 @@ namespace WeappyTest
         {
             if (InputWrapper.BeginLeft || InputWrapper.BeginRight)
             {
-                _selectedCharacter = (_selectedCharacter + 1) % _charactersOutline.Length;
+                SelectedCharacter = (SelectedCharacter + 1) % _charactersOutline.Length;
                 ShowCharacter();
             }
 
@@ -38,7 +38,7 @@ namespace WeappyTest
         private void ShowCharacter()
         {
             for (int i = 0; i < _charactersOutline.Length; i++)
-                _charactersOutline[i].SetActive(i == _selectedCharacter);
+                _charactersOutline[i].SetActive(i == SelectedCharacter);
         }
     }
 }

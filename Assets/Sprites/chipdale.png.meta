@@ -53,6 +53,48 @@ TextureImporter:
   - first:
       213: -4987725415542263913
     second: star
+  - first:
+      213: 8926687155590466534
+    second: dale_idle
+  - first:
+      213: 4190078706698342113
+    second: dale_jump
+  - first:
+      213: 6033930365113891766
+    second: dale_crouch
+  - first:
+      213: -4814665682107842227
+    second: dale_run_0
+  - first:
+      213: 2659367782090066453
+    second: dale_run_1
+  - first:
+      213: -2642321330085872328
+    second: dale_run_2
+  - first:
+      213: -8645477442529577493
+    second: dale_carry_throw
+  - first:
+      213: 8760793362701643104
+    second: dale_carry_jump
+  - first:
+      213: 854619812024867834
+    second: dale_carry_idle
+  - first:
+      213: -1785661252472147669
+    second: dale_carry_run_0
+  - first:
+      213: -7590324878441671080
+    second: dale_carry_run_1
+  - first:
+      213: -5059387647574080477
+    second: dale_carry_run_2
+  - first:
+      213: -6648782287571997839
+    second: dale_stun
+  - first:
+      213: -1450541221871815062
+    second: dale_fall
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -518,6 +560,300 @@ TextureImporter:
       bones: []
       spriteID: 79f6a61292a08cab0800000000000000
       internalID: -4987725415542263913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_idle
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 256
+        width: 17
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eb03022ca6f1eb70800000000000000
+      internalID: 8926687155590466534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_jump
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 256
+        width: 18
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: -0.045454547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eecead3266262a30800000000000000
+      internalID: 4190078706698342113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_crouch
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 256
+        width: 19
+        height: 16
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bb7e0ca2b3dcb350800000000000000
+      internalID: 6033930365113891766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_run_0
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 228
+        width: 18
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d41c2b1421fde2db0800000000000000
+      internalID: -4814665682107842227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_run_1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 228
+        width: 17
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ac89a68e8f7e420800000000000000
+      internalID: 2659367782090066453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_run_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 229
+        width: 17
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d3bc9ffb6945bd0800000000000000
+      internalID: -2642321330085872328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_throw
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 201
+        width: 23
+        height: 22
+      alignment: 9
+      pivot: {x: 0.47826087, y: 0.13636364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be53f5c5218150880800000000000000
+      internalID: -8645477442529577493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_jump
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 202
+        width: 18
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d6e6e8527949970800000000000000
+      internalID: 8760793362701643104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_idle
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 201
+        width: 18
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afbd0c9e0383cdb00800000000000000
+      internalID: 854619812024867834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_run_0
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 174
+        width: 18
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21f73d3d8e0837e0800000000000000
+      internalID: -1785661252472147669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_run_1
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 174
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8569ca20dbfb9a690800000000000000
+      internalID: -7590324878441671080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_carry_run_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 174
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32409558db179c9b0800000000000000
+      internalID: -5059387647574080477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_stun
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 124
+        width: 17
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5294118, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17bac587cb7cab3a0800000000000000
+      internalID: -6648782287571997839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dale_fall
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 124
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04347826}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a66f44aa174aedbe0800000000000000
+      internalID: -1450541221871815062
       vertices: []
       indices: 
       edges: []
